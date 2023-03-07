@@ -2,10 +2,9 @@ import { Toaster, toast } from "react-hot-toast";
 
 type AnswerPropsType = {
   generatedAnswer: string;
-  answerRef: string;
 };
 
-export default function Answer({ generatedAnswer, answerRef }: AnswerPropsType) {
+export default function Answer({ generatedAnswer }: AnswerPropsType) {
   return (
     <>
     <Toaster
@@ -16,7 +15,7 @@ export default function Answer({ generatedAnswer, answerRef }: AnswerPropsType) 
     <div>
                 <h2
                   className="sm:text-4xl text-3xl font-bold text-slate-900 mx-auto"
-                  ref={answerRef}>
+                  >
                   Answer
                 </h2>
               </div>

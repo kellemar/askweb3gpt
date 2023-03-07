@@ -9,6 +9,8 @@ export default function Header() {
           askWeb3GPT
         </h1>
       </Link>
+      <div>
+      <span className="text-stone-300 text-xs italic">Data powered by:</span>
       <a
         href="https://avocadodao.io"
         target="_blank"
@@ -22,6 +24,7 @@ export default function Header() {
           height={58}
         />
       </a>
+      </div>
     </header>
   );
 }
