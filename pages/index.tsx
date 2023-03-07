@@ -113,7 +113,7 @@ const Home: NextPage = () => {
         <div className="space-y-5 my-10">
           {generatedAnswer && (
             <>
-              <Answer generatedAnswer={generatedAnswer} answerRef={answerRef} />
+              <Answer generatedAnswer={generatedAnswer.toString()} answerRef={answerRef.toString()} />
             </>
           )}
         </div>
