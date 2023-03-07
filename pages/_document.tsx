@@ -8,7 +8,7 @@ class MyDocument extends Document {
           <link rel="icon" href="/favicon.ico" />
           <meta
             name="description"
-            content="Generate your next Twitter bio in seconds."
+            content="The directory for all your Web3 and GameFi needs. Ask anything about the exciting games that are being played right now on the blockchain!"
           />
           <meta property="og:site_name" content="twitterbio.com" />
           <meta
