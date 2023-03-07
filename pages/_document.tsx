@@ -13,22 +13,22 @@ class MyDocument extends Document {
           <meta property="og:site_name" content="twitterbio.com" />
           <meta
             property="og:description"
-            content="Generate your next Twitter bio in seconds."
+            content="The directory for all your Web3 and GameFi needs. Ask anything about the exciting games that are being played right now on the blockchain!"
           />
-          <meta property="og:title" content="Twitter Bio Generator" />
+          <meta property="og:title" content="Ask Web3GPT" />
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content="Twitter Bio Generator" />
+          <meta name="twitter:title" content="Ask Web3GPT" />
           <meta
             name="twitter:description"
-            content="Generate your next Twitter bio in seconds."
+            content="The directory for all your Web3 and GameFi needs. Ask anything about the exciting games that are being played right now on the blockchain!"
           />
           <meta
             property="og:image"
-            content="https://twitterbio.com/og-image.png"
+            content="https://web3gpt.app/og-logo.jpeg"
           />
           <meta
             name="twitter:image"
-            content="https://twitterbio.com/og-image.png"
+            content="https://web3gpt.app/og-logo.jpeg"
           />
         </Head>
         <body>
