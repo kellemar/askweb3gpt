@@ -48,7 +48,7 @@ const Home: NextPage = () => {
     if (!data) {
       return;
     }
-    console.log(data);
+    
     const reader = data.getReader();
     const decoder = new TextDecoder();
     let done = false;
