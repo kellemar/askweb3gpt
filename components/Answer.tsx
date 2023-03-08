@@ -12,7 +12,7 @@ export default function Answer(this: any, { generatedAnswer }: AnswerPropsType) 
   const windowSize = useRef([window.innerWidth, window.innerHeight]);
   console.log(answer);
   const opts = {
-  width: 320,
+  width: 360,
    playerVars: {
       autoplay: 0,
     },
