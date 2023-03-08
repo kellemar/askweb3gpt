@@ -32,7 +32,7 @@ export default function Answer(this: any, { generatedAnswer }: AnswerPropsType) 
                 </h2>
               </div>
               <div className="space-y-8 flex flex-col items-center justify-center min-w-m max-w-xl mx-auto">
-              <div className="bg-purple-100 rounded-xl shadow-md p-4 hover:bg-gray-100 transition cursor-copy border"
+              <div className="bg-purple-100 rounded-xl shadow-md p-4 hover:bg-purple-200 transition cursor-copy border"
                         onClick={() => {
                           navigator.clipboard.writeText(answer);
                           toast("Text copied!", {
