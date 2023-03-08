@@ -1,5 +1,6 @@
 import { Toaster, toast } from "react-hot-toast";
 import YouTube from "react-youtube";
+import { useRef } from 'react';
 
 type AnswerPropsType = {
   generatedAnswer: string;
@@ -8,9 +9,10 @@ type AnswerPropsType = {
 export default function Answer(this: any, { generatedAnswer }: AnswerPropsType) {
   const answer = JSON.parse(generatedAnswer)['output'];
   const video = JSON.parse(generatedAnswer)['video'];
+  const windowSize = useRef([window.innerWidth, window.innerHeight]);
   console.log(answer);
   const opts = {
-    width:320,
+  width: (windowSize.current[0]/3 || 320),
    playerVars: {
       autoplay: 0,
     },
