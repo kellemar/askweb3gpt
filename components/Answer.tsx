@@ -10,8 +10,8 @@ export default function Answer(this: any, { generatedAnswer }: AnswerPropsType) 
   const video = JSON.parse(generatedAnswer)['video'];
   console.log(answer);
   const opts = {
-    width: "600",
-    playerVars: {
+    width:320,
+   playerVars: {
       autoplay: 0,
     },
   };
@@ -41,9 +41,9 @@ export default function Answer(this: any, { generatedAnswer }: AnswerPropsType) 
                           <p className="text-left">{answer}</p>
 
                       {video && (
-                            <div className="mt-10 mx-auto">
+                          <div className="flex mt-10 justify-center">
                             <YouTube videoId={video} 
-                                opts={opts} />
+                                opts={opts}/>
                           </div>
 
                       )}
