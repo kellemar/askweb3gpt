@@ -28,9 +28,9 @@ export default function Answer(this: any, { generatedAnswer }: AnswerPropsType) 
         />
     <div>
                 <h2
-                  className="sm:text-4xl text-3xl font-bold text-slate-900 mx-auto"
+                  className="sm:text-2xl text-2xl font-bold text-slate-900 mx-auto"
                   >
-                  
+                  Here's what we have
                 </h2>
               </div>
               <div className="space-y-8 flex flex-col items-center justify-center min-w-m max-w-xl mx-auto">

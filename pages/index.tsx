@@ -11,6 +11,7 @@ const Home: NextPage = () => {
   const [loading, setLoading] = useState(false);
   const [answer, setAnswer] = useState("");
   const [generatedAnswer, setGeneratedAnswer] = useState<String>("");
+  const [timeTaken, setTimeTaken] = useState(0);
   const auth_key = process.env.NEXT_PUBLIC_AUTH_KEY || "NA";
   const api_url = process.env.NEXT_PUBLIC_SERVER_API_URL || "NA";
 
@@ -25,6 +26,7 @@ const Home: NextPage = () => {
   const input = answer;
 
   const generateAnswer = async (e: any) => {
+    const startTime = Date.now();
     e.preventDefault();
     setGeneratedAnswer("");
     setLoading(true);
@@ -56,6 +58,10 @@ const Home: NextPage = () => {
     while (!done) {
       const { value, done: doneReading } = await reader.read();
       done = doneReading;
+      if(done == true){
+        setTimeTaken((((Date.now() - startTime) % 60000) / 1000));
+        
+      }
       const chunkValue = decoder.decode(value);
       setGeneratedAnswer((prev) => prev + chunkValue);
     }
@@ -110,13 +116,18 @@ const Home: NextPage = () => {
         </div>
         
         <hr className="h-px bg-gray-700 border-1 dark:bg-gray-700" />
-        <div className="space-y-5 my-10">
+        <div className="space-y-5 my-5">
           {generatedAnswer && (
             <>
               <Answer generatedAnswer={generatedAnswer.toString()}  />
             </>
           )}
         </div>
+        {timeTaken && (
+        <div className="text-sm">
+           <p>This answer took {timeTaken} seconds</p>
+        </div>
+        )}
       </main>
       <Footer />
     </div>
