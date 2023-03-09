@@ -59,7 +59,7 @@ const Home: NextPage = () => {
       const { value, done: doneReading } = await reader.read();
       done = doneReading;
       if(done == true){
-        setTimeTaken((((Date.now() - startTime) % 60000) / 1000));
+        setTimeTaken((((Date.now() - startTime) % 60000) / 1000) + "");
         
       }
       const chunkValue = decoder.decode(value);
