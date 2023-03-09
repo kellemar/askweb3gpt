@@ -11,7 +11,7 @@ const Home: NextPage = () => {
   const [loading, setLoading] = useState(false);
   const [answer, setAnswer] = useState("");
   const [generatedAnswer, setGeneratedAnswer] = useState<String>("");
-  const [timeTaken, setTimeTaken] = useState(0);
+  const [timeTaken, setTimeTaken] = useState("");
   const auth_key = process.env.NEXT_PUBLIC_AUTH_KEY || "NA";
   const api_url = process.env.NEXT_PUBLIC_SERVER_API_URL || "NA";
 
