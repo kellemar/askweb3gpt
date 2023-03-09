@@ -1,7 +1,6 @@
 import { Toaster, toast } from "react-hot-toast";
 import YouTube from "react-youtube";
 import { useRef } from 'react';
-import Linkify from 'react-linkify';
 import { link } from "fs";
 
 type AnswerPropsType = {
@@ -50,7 +49,7 @@ export default function Answer(this: any, { generatedAnswer }: AnswerPropsType) 
               }}>
               Copy Text
             </button>
-                          <p className="text-left"><Linkify properties={{target: '_blank', style: {color: 'black', fontWeight: 'bold'}}}>{answer}</Linkify></p>
+                          <p className="text-left">{answer}</p>
                           {articleLink && (
           <div className="text-left mt-5">
         Read more at: {" "}
