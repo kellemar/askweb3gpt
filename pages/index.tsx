@@ -125,7 +125,7 @@ const Home: NextPage = () => {
         </div>
         {timeTaken && (
         <div className="text-sm">
-           <p>This answer took {timeTaken} seconds</p>
+           <p>This answer took {timeTaken} seconds.</p>
         </div>
         )}
       </main>
