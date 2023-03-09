@@ -89,7 +89,7 @@ const Home: NextPage = () => {
             rows={4}
             className="w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black my-5"
             placeholder={
-              "e.g. What is Star Atlas? \nShow me some games that are action-based.\nWho is the team behind Phantom Galaxies?"
+              "e.g. What is Phantom Galaxies? \nWhat is the token price of Phantom Galaxies?\nWho is the team behind Phantom Galaxies?"
             }
           />
           {!loading && (

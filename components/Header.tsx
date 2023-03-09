@@ -10,7 +10,7 @@ export default function Header() {
         </h1>
       </Link>
       <div>
-      <span className="text-stone-300 text-xs italic">Data powered by:</span>
+      <span className="text-stone-300 text-xs italic mt-2">Data powered by:</span>
       <a
         href="https://avocadodao.io"
         target="_blank"
