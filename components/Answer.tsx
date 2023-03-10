@@ -74,7 +74,7 @@ export default function Answer(this: any, { generatedAnswer }: AnswerPropsType) 
                       {video && (
                         
                           <div className="flex mt-10 justify-center">
-                            <iframe src={"https://www.youtube.com/embed/"+video} className="w-full aspect-video" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <iframe src={"https://www.youtube.com/embed/"+video} className="w-full aspect-video" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
                           </div>
 
                       )}
