@@ -87,15 +87,15 @@ const Home: NextPage = () => {
         <div className="max-w-xl w-full">
           <div className="flex items-center justify-center space-x-3">
           <button onClick={(e) => setAnswer(e.currentTarget.innerHTML)}
-              className="bg-purple-400 rounded-xl text-white text-xs px-4 py-2 sm:mt-10 mt-8 hover:bg-purple/80 w-full">
+              className="bg-purple-400 rounded-xl text-white text-xs px-4 py-2 sm:mt-10 mt-8 hover:bg-purple/80 w-full h-20 sm:h-12">
               What is Phantom Galaxies?
               </button>
               <button onClick={(e) => setAnswer(e.currentTarget.innerHTML)}
-              className="bg-purple-400 rounded-xl text-white text-xs px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full">
+              className="bg-purple-400 rounded-xl text-white text-xs px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full h-20 sm:h-12">
               What is the token price of League of Kingdoms?
               </button>
               <button onClick={(e) => setAnswer(e.currentTarget.innerHTML)}
-              className="bg-purple-400 rounded-xl text-white text-xs px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full">
+              className="bg-purple-400 rounded-xl text-white text-xs px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full h-20 sm:h-12">
               Who is the team behind Illuvium?
               </button>
           </div>
