@@ -2,17 +2,25 @@ import { Toaster, toast } from "react-hot-toast";
 import YouTube from "react-youtube";
 import { useRef } from 'react';
 import { link } from "fs";
+import ReactMarkdown from 'react-markdown'
 
 type AnswerPropsType = {
-  generatedAnswer: string;
+  generatedAnswer: string,
 };
 
 export default function Answer(this: any, { generatedAnswer }: AnswerPropsType) {
+
   const baseURL = "https://core.avocadodao.io/games/";
   const answer = JSON.parse(generatedAnswer)['output'];
   const video = JSON.parse(generatedAnswer)['video'];
   const articleLink = JSON.parse(generatedAnswer)['article'];
   const windowSize = useRef([window.innerWidth, window.innerHeight]);
+
+  // Check for possible lists being presented
+  if (answer.includes(". -")){
+
+  }
+
   const opts = {
   width: 360,
    playerVars: {
@@ -33,9 +41,9 @@ export default function Answer(this: any, { generatedAnswer }: AnswerPropsType) 
                   Here's what we have
                 </h2>
               </div>
-              <div className="space-y-8 flex flex-col items-center justify-center min-w-m max-w-xl mx-auto">
+              <div className="space-y-8 flex flex-col items-center justify-center min-w-m max-w-xl mx-auto max-w-xl w-full">
               
-              <div className="bg-purple-100 rounded-xl shadow-md p-4 hover:bg-purple-200 transition border"
+              <div className="bg-purple-100 rounded-xl shadow-md p-4 hover:bg-purple-200 transition border "
                         
                         key={answer}>
             
@@ -49,9 +57,9 @@ export default function Answer(this: any, { generatedAnswer }: AnswerPropsType) 
               }}>
               Copy Text
             </button>
-                          <p className="text-left">{answer}</p>
+                          <ReactMarkdown className="text-left m-5">{answer}</ReactMarkdown>
                           {articleLink && (
-          <div className="text-left mt-5">
+          <div className="text-left m-5">
         Read more at: {" "}
         <a
           href={baseURL+articleLink}

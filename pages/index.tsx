@@ -16,7 +16,7 @@ const Home: NextPage = () => {
   const api_url = process.env.NEXT_PUBLIC_SERVER_API_URL || "NA";
 
   const answerRef = useRef<null | HTMLDivElement>(null);
-
+  
   const scrollToBios = () => {
     if (answerRef.current !== null) {
       answerRef.current.scrollIntoView({ behavior: "smooth" });
@@ -25,7 +25,10 @@ const Home: NextPage = () => {
 
   const input = answer;
 
+
+
   const generateAnswer = async (e: any) => {
+    setTimeTaken("");
     const startTime = Date.now();
     e.preventDefault();
     setGeneratedAnswer("");
@@ -34,7 +37,7 @@ const Home: NextPage = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer "+auth_key
+        "Authorization": "Bearer " + auth_key
       },
       body: JSON.stringify({
         input,
@@ -82,12 +85,19 @@ const Home: NextPage = () => {
           Ask about Web3 Gaming!
         </h1>
         <div className="max-w-xl w-full">
-          <div className="flex mt-10 items-center justify-center space-x-3">
-            
-            <p className="text-center font-medium">
-              Write your question or any request related to Web3 gaming here.
-            </p>
-            
+          <div className="flex items-center justify-center space-x-3">
+          <button onClick={(e) => setAnswer(e.currentTarget.innerHTML)}
+              className="bg-purple-400 rounded-xl text-white text-xs px-4 py-2 sm:mt-10 mt-8 hover:bg-purple/80 w-full">
+              What is Phantom Galaxies?
+              </button>
+              <button onClick={(e) => setAnswer(e.currentTarget.innerHTML)}
+              className="bg-purple-400 rounded-xl text-white text-xs px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full">
+              What is the token price of League of Kingdoms?
+              </button>
+              <button onClick={(e) => setAnswer(e.currentTarget.innerHTML)}
+              className="bg-purple-400 rounded-xl text-white text-xs px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full">
+              Who is the team behind Illuvium?
+              </button>
           </div>
           <textarea
             value={answer}
@@ -116,10 +126,10 @@ const Home: NextPage = () => {
         </div>
         
         <hr className="h-px bg-gray-700 border-1 dark:bg-gray-700" />
-        <div className="space-y-5 my-5">
+        <div className="space-y-5 my-5" ref={answerRef}>
           {generatedAnswer && (
             <>
-              <Answer generatedAnswer={generatedAnswer.toString()}  />
+              <Answer generatedAnswer={generatedAnswer.toString()}/>
             </>
           )}
         </div>
