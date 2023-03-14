@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Answer from "../components/Answer";
 import LoadingDots from "../components/LoadingDots";
+import { text } from "stream/consumers";
 
 
 const games = ["Phantom Galaxies", "Illuvium", "League of Kingdoms", "Decentraland", "Apeiron", "Star Atlas"]
@@ -14,25 +15,28 @@ const Home: NextPage = () => {
 
   const [gameName, setGameName] = useState("");
   const [loading, setLoading] = useState(false);
-  const [answer, setAnswer] = useState("");
-  const [generatedAnswer, setGeneratedAnswer] = useState<String>("");
+  const [question, setQuestion] = useState("");
+  const [answerList, updateAnswerList] = useState<any[]>([]);
+  const [generatedAnswer, setGeneratedAnswer] = useState("");
   const [timeTaken, setTimeTaken] = useState("");
   const auth_key = process.env.NEXT_PUBLIC_AUTH_KEY || "NA";
   const api_url = process.env.NEXT_PUBLIC_SERVER_API_URL || "NA";
 
+  const [textCount, setTextCount] = useState(0);
+
   const answerRef = useRef<null | HTMLDivElement>(null);
-  
+
   const scrollToBios = () => {
     if (answerRef.current !== null) {
       answerRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
 
-  const input = answer;
-  
+  const input = question;
+
   useEffect(() => {
     const randomNumber = Math.floor(Math.random() * games.length);
-    setGameName("What is "+games[randomNumber]);
+    setGameName("What is " + games[randomNumber]);
   }, []);
 
   const generateAnswer = async (e: any) => {
@@ -55,29 +59,19 @@ const Home: NextPage = () => {
     if (!response.ok) {
       throw new Error(response.statusText);
     }
+    const result = await response.json();
 
-    // This data is a ReadableStream
-    const data = response.body;
-    if (!data) {
-      return;
-    }
-    
-    const reader = data.getReader();
-    const decoder = new TextDecoder();
-    let done = false;
 
-    while (!done) {
-      const { value, done: doneReading } = await reader.read();
-      done = doneReading;
-      if(done == true){
-        setTimeTaken((((Date.now() - startTime) % 60000) / 1000) + "");
-        
-      }
-      const chunkValue = decoder.decode(value);
-      setGeneratedAnswer((prev) => prev + chunkValue);
-    }
+    setGeneratedAnswer(result);
     scrollToBios();
     setLoading(false);
+
+    const outputOnly = result['output'];
+    setTextCount(textCount + 1);
+    updateAnswerList([...answerList, { "id": textCount, "question": input, "output": outputOnly }]);
+    setTextCount(textCount + 1);
+    setQuestion("");
+
   };
 
   return (
@@ -94,58 +88,58 @@ const Home: NextPage = () => {
         </h1>
         <div className="max-w-xl w-full">
           <div className="flex items-center justify-center space-x-3">
-          <button onClick={(e) => setAnswer(e.currentTarget.innerHTML)}
+            <button onClick={(e) => setQuestion(e.currentTarget.innerHTML)}
               className="bg-purple-400 rounded-xl text-white text-xs px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full h-20 sm:h-12">
               What are the games available?
-              </button>
-              <button onClick={(e) => setAnswer(e.currentTarget.innerHTML)}
+            </button>
+            <button onClick={(e) => setQuestion(e.currentTarget.innerHTML)}
               className="bg-purple-400 rounded-xl text-white text-xs px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full h-20 sm:h-12">
               {gameName}?
-              </button>
-              <button onClick={(e) => setAnswer(e.currentTarget.innerHTML)}
+            </button>
+            <button onClick={(e) => setQuestion(e.currentTarget.innerHTML)}
               className="bg-purple-400 rounded-xl text-white text-xs px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full h-20 sm:h-12">
               What are the action games?
-              </button>
+            </button>
           </div>
+          <div className="space-y-5 my-2" ref={answerRef}>
+            {answerList && (
+              <>
+                <Answer outputAnswer={answerList} />
+              </>
+            )}
+          </div>
+          {timeTaken && (
+            <div className="text-sm">
+              <p>This answer took {timeTaken} seconds.</p>
+            </div>
+          )}
           <textarea
-            value={answer}
-            onChange={(e) => setAnswer(e.target.value)}
+            value={question}
+            onChange={(e) => setQuestion(e.target.value)}
             rows={4}
             className="w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black my-5"
             placeholder={
-              "e.g. What is Phantom Galaxies? \nWhat is the token price of Phantom Galaxies?\nWho is the team behind Phantom Galaxies?"
+              "What's your question?"
             }
           />
           {!loading && (
             <button
-              className="bg-black rounded-xl text-white font-medium px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full"
+              className="bg-black rounded-xl text-white font-medium px-4 py-2 mt-2 hover:bg-black/80 w-full"
               onClick={(e) => generateAnswer(e)}>
               Ask!
             </button>
           )}
           {loading && (
             <button
-              className="bg-black rounded-xl text-white font-medium px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full"
+              className="bg-black rounded-xl text-white font-medium px-4 py-2 mt-2 hover:bg-black/80 w-full"
               disabled
             >
               <LoadingDots color="white" style="large" />
             </button>
           )}
         </div>
-        
-        <hr className="h-px bg-gray-700 border-1 dark:bg-gray-700" />
-        <div className="space-y-5 my-5" ref={answerRef}>
-          {generatedAnswer && (
-            <>
-              <Answer generatedAnswer={generatedAnswer.toString()}/>
-            </>
-          )}
-        </div>
-        {timeTaken && (
-        <div className="text-sm">
-           <p>This answer took {timeTaken} seconds.</p>
-        </div>
-        )}
+
+
       </main>
       <Footer />
     </div>
