@@ -63,15 +63,16 @@ const Home: NextPage = () => {
 
 
     setGeneratedAnswer(result);
-    scrollToBios();
     setLoading(false);
 
     const outputOnly = result['output'];
+    const article = result['article'];
     setTextCount(textCount + 1);
-    updateAnswerList([...answerList, { "id": textCount, "question": input, "output": outputOnly }]);
+    updateAnswerList([...answerList, { "id": textCount, "question": input, "output": outputOnly, "articleLink": article }]);
     setTextCount(textCount + 1);
     setQuestion("");
-
+    scrollToBios();
+    
   };
 
   return (
@@ -87,7 +88,20 @@ const Home: NextPage = () => {
           Ask about Web3 Gaming!
         </h1>
         <div className="max-w-xl w-full">
-          <div className="flex items-center justify-center space-x-3">
+          
+          <div className="space-y-5 my-2">
+            {answerList && (
+              <>
+                <Answer outputAnswer={answerList} />
+              </>
+            )}
+          </div>
+          {timeTaken && (
+            <div className="text-sm">
+              <p>This answer took {timeTaken} seconds.</p>
+            </div>
+          )}
+          <div ref={answerRef} className="flex items-center justify-center space-x-3">
             <button onClick={(e) => setQuestion(e.currentTarget.innerHTML)}
               className="bg-purple-400 rounded-xl text-white text-xs px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full h-20 sm:h-12">
               What are the games available?
@@ -101,18 +115,6 @@ const Home: NextPage = () => {
               What are the action games?
             </button>
           </div>
-          <div className="space-y-5 my-2" ref={answerRef}>
-            {answerList && (
-              <>
-                <Answer outputAnswer={answerList} />
-              </>
-            )}
-          </div>
-          {timeTaken && (
-            <div className="text-sm">
-              <p>This answer took {timeTaken} seconds.</p>
-            </div>
-          )}
           <textarea
             value={question}
             onChange={(e) => setQuestion(e.target.value)}

@@ -10,6 +10,7 @@ type Answer = {
   id: number,
   question: string,
   output: string
+  articleLink?: string
 };
 
 type AnswerPropsType = {
@@ -20,7 +21,6 @@ type AnswerPropsType = {
 
 export default function Answer({ outputAnswer }: AnswerPropsType) {
 
-  //const baseURL = "https://core.avocadodao.io/games/";
   //const answer = JSON.parse(generatedAnswer)['output'];
   //const video = JSON.parse(generatedAnswer)['video'];
   //const articleLink = JSON.parse(generatedAnswer)['article'];
@@ -29,7 +29,7 @@ export default function Answer({ outputAnswer }: AnswerPropsType) {
   const video = "";
   const articleLink = "";
 
-  const listItems = outputAnswer.map(({ id, question, output }) =>
+  const listItems = outputAnswer.map(({ id, question, output, articleLink }) =>
     <>
       <div>
       </div>
@@ -69,7 +69,7 @@ export default function Answer({ outputAnswer }: AnswerPropsType) {
                 icon: "✂️",
               });
             }}>
-            Copy Text
+            Copy
           </button>
         </div>
 
