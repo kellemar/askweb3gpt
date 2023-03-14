@@ -1,13 +1,18 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Answer from "../components/Answer";
 import LoadingDots from "../components/LoadingDots";
 
+
+const games = ["Phantom Galaxies", "Illuvium", "League of Kingdoms", "Decentraland", "Apeiron", "Star Atlas"]
+
 const Home: NextPage = () => {
+
+  const [gameName, setGameName] = useState("");
   const [loading, setLoading] = useState(false);
   const [answer, setAnswer] = useState("");
   const [generatedAnswer, setGeneratedAnswer] = useState<String>("");
@@ -24,8 +29,11 @@ const Home: NextPage = () => {
   };
 
   const input = answer;
-
-
+  
+  useEffect(() => {
+    const randomNumber = Math.floor(Math.random() * games.length);
+    setGameName("What is "+games[randomNumber]);
+  }, []);
 
   const generateAnswer = async (e: any) => {
     setTimeTaken("");
@@ -87,16 +95,16 @@ const Home: NextPage = () => {
         <div className="max-w-xl w-full">
           <div className="flex items-center justify-center space-x-3">
           <button onClick={(e) => setAnswer(e.currentTarget.innerHTML)}
-              className="bg-purple-400 rounded-xl text-white text-xs px-4 py-2 sm:mt-10 mt-8 hover:bg-purple/80 w-full h-20 sm:h-12">
-              What is Phantom Galaxies?
+              className="bg-purple-400 rounded-xl text-white text-xs px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full h-20 sm:h-12">
+              What are the games available?
               </button>
               <button onClick={(e) => setAnswer(e.currentTarget.innerHTML)}
               className="bg-purple-400 rounded-xl text-white text-xs px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full h-20 sm:h-12">
-              What is the token price of League of Kingdoms?
+              {gameName}?
               </button>
               <button onClick={(e) => setAnswer(e.currentTarget.innerHTML)}
               className="bg-purple-400 rounded-xl text-white text-xs px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full h-20 sm:h-12">
-              Who is the team behind Illuvium?
+              What are the action games?
               </button>
           </div>
           <textarea

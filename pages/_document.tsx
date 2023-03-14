@@ -31,7 +31,7 @@ class MyDocument extends Document {
             content="https://web3gpt.app/og-logo.jpeg"
           />
         </Head>
-        <body>
+        <body >
           <Main />
           <NextScript />
         </body>

@@ -4,9 +4,13 @@ import { useRef } from 'react';
 import { link } from "fs";
 import ReactMarkdown from 'react-markdown'
 
+
+
 type AnswerPropsType = {
   generatedAnswer: string,
 };
+
+
 
 export default function Answer(this: any, { generatedAnswer }: AnswerPropsType) {
 
@@ -40,6 +44,7 @@ export default function Answer(this: any, { generatedAnswer }: AnswerPropsType) 
                   >
                   Here's what we have
                 </h2>
+                
               </div>
               <div className="space-y-8 flex flex-col items-center justify-center min-w-m max-w-xl mx-auto max-w-xl w-full">
               
