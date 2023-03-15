@@ -6,10 +6,11 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Answer from "../components/Answer";
 import LoadingDots from "../components/LoadingDots";
-import { text } from "stream/consumers";
 
 
-const games = ["Phantom Galaxies", "Illuvium", "League of Kingdoms", "Decentraland", "Apeiron", "Star Atlas"]
+
+const games = ["Phantom Galaxies", "Illuvium", "League of Kingdoms", "Decentraland", "Apeiron", "Star Atlas"];
+const questionTypes = ["What is ", " token price?", "What is the market cap of ", "What can you do in "];
 
 const Home: NextPage = () => {
 
@@ -101,7 +102,7 @@ const Home: NextPage = () => {
               <p>This answer took {timeTaken} seconds.</p>
             </div>
           )}
-          <div ref={answerRef} className="flex items-center justify-center space-x-3">
+          <div className="flex items-center justify-center space-x-3">
             <button onClick={(e) => setQuestion(e.currentTarget.innerHTML)}
               className="bg-purple-400 rounded-xl text-white text-xs px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full h-20 sm:h-12">
               What are the games available?
@@ -115,6 +116,7 @@ const Home: NextPage = () => {
               What are the action games?
             </button>
           </div>
+          <div ref={answerRef}>
           <textarea
             value={question}
             onChange={(e) => setQuestion(e.target.value)}
@@ -123,7 +125,7 @@ const Home: NextPage = () => {
             placeholder={
               "What's your question?"
             }
-          />
+          /></div>
           {!loading && (
             <button
               className="bg-black rounded-xl text-white font-medium px-4 py-2 mt-2 hover:bg-black/80 w-full"

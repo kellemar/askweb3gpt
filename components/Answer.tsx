@@ -3,6 +3,7 @@ import YouTube from "react-youtube";
 import { useRef } from 'react';
 import { link } from "fs";
 import ReactMarkdown from 'react-markdown'
+import {FaRegCopy} from 'react-icons/fa';
 
 const games = ["Phantom Galaxies", "Illuvium", "League of Kingdoms", "Decentraland", "Apeiron", "Star Atlas"]
 
@@ -38,7 +39,7 @@ export default function Answer({ outputAnswer }: AnswerPropsType) {
             className="mt-5 ml-auto p-10 bg-purple-200 rounded-xl text-black text-s px-2 mb-2 py-2">
             {question}
           </div>
-        <div className="bg-purple-100 rounded-xl shadow-md p-4 hover:bg-purple-200 transition border " key={id}>
+        <div className="bg-purple-100 rounded-xl shadow-md p-4 hover:bg-purple-200 transition border w-full" key={id}>
         
           <ReactMarkdown className="text-left m-5">{output}</ReactMarkdown>
           {articleLink && (
@@ -69,7 +70,7 @@ export default function Answer({ outputAnswer }: AnswerPropsType) {
                 icon: "✂️",
               });
             }}>
-            Copy
+            <FaRegCopy/>
           </button>
         </div>
 
