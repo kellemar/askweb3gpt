@@ -7,10 +7,45 @@ import Header from "../components/Header";
 import Answer from "../components/Answer";
 import LoadingDots from "../components/LoadingDots";
 
-
-
+// Input initial list of games
 const games = ["Phantom Galaxies", "Illuvium", "League of Kingdoms", "Decentraland", "Apeiron", "Star Atlas", "Big Time", "King of Fighters", "Axie Infinity"];
-const questionTypes = ["What is ", "What is the token price of ", "What is the market cap of ", "What can you do in ", "Who is the team behind "];
+
+// Create enum of questions users can select
+enum QuestionType {
+  Name = 'What is ',
+  TokenPrice = 'What is the token price of ',
+  MarketCap = 'What is the market cap of ',
+  Actions = 'What can you do in ',
+  Team = 'Who is the team behind ',
+  Discord = 'What is the Discord for ',
+  Twitter = 'What is the Twitter of ',
+  Play = 'How do you play ',
+  Tokens = 'What are the tokens in ',
+}
+
+// Create groups of questions to mimic randomness
+const questionTypes1 = [
+  QuestionType.Name,
+  QuestionType.TokenPrice,
+  QuestionType.MarketCap,
+];
+
+const questionTypes2 = [
+  QuestionType.Actions,
+  QuestionType.Team,
+  QuestionType.Discord,
+];
+
+const questionTypes3 = [
+  QuestionType.Twitter,
+  QuestionType.Play,
+  QuestionType.Tokens,
+];
+
+
+function getRandomIndex(array: any[]) {
+  return Math.floor(Math.random() * array.length);
+}
 
 const Home: NextPage = () => {
 
@@ -27,6 +62,8 @@ const Home: NextPage = () => {
   const [textCount, setTextCount] = useState(0);
   const answerRef = useRef<null | HTMLDivElement>(null);
 
+  const gameName = useRef("");
+
   const scrollToBios = () => {
     if (answerRef.current !== null) {
       answerRef.current.scrollIntoView({ behavior: "smooth" });
@@ -34,22 +71,24 @@ const Home: NextPage = () => {
   };
 
   const input = question;
-  const regenerateButtons = () =>{
-    const randomNumber1 = Math.floor(Math.random() * games.length);
-    const randomNumber2 = Math.floor(Math.random() * games.length);
-    const randomNumber3 = Math.floor(Math.random() * games.length);
+  const regenerateButtons = (gameName?: string) =>{
+    console.log(gameName);
+    const randomGameIdx1 = getRandomIndex(games);
+    const randomGameIdx2 = getRandomIndex(games);
+    const randomGameIdx3 = getRandomIndex(games);
 
-    const randomNumber4 = Math.floor(Math.random() * questionTypes.length);
-    const randomNumber5 = Math.floor(Math.random() * questionTypes.length);
-    const randomNumber6 = Math.floor(Math.random() * questionTypes.length);
+    const randomQuestionIdx1 = getRandomIndex(questionTypes1);
+    const randomQuestionIdx2 = getRandomIndex(questionTypes2);
+    const randomQuestionIdx3 = getRandomIndex(questionTypes3);
 
-    setButton1Text(questionTypes[randomNumber4] + games[randomNumber1]+"?");
-    setButton2Text(questionTypes[randomNumber5] + games[randomNumber2]+"?");
-    setButton3Text(questionTypes[randomNumber6] + games[randomNumber3]+"?");
+    setButton1Text(`${questionTypes1[randomQuestionIdx1]}${gameName || games[randomGameIdx1]}?`);
+    setButton2Text(`${questionTypes2[randomQuestionIdx2]}${gameName || games[randomGameIdx2]}?`);
+    setButton3Text(`${questionTypes3[randomQuestionIdx3]}${gameName || games[randomGameIdx3]}?`);
+    
   };
 
   useEffect(() => {
-    regenerateButtons();
+    regenerateButtons(gameName.current);
   
   }, [answerList]);
 
@@ -76,10 +115,12 @@ const Home: NextPage = () => {
     
     setLoading(false);
     setTimeTaken((((Date.now() - startTime) % 60000) / 1000) + "");
-    regenerateButtons();
-
+    console.log(result);
     const outputOnly = result['output'];
     const article = result['article'];
+    gameName.current = result['games_listed'][0];
+    //regenerateButtons(gameName);
+
     setTextCount(textCount + 1);
     updateAnswerList([...answerList, { "id": textCount, "question": input, "output": outputOnly, "articleLink": article }]);
     setTextCount(textCount + 1);
