@@ -14,11 +14,9 @@ const questionTypes = ["What is ", "What is the token price of ", "What is the m
 
 const Home: NextPage = () => {
 
-  const [gameName, setGameName] = useState("");
   const [loading, setLoading] = useState(false);
   const [question, setQuestion] = useState("");
   const [answerList, updateAnswerList] = useState<any[]>([]);
-  const [generatedAnswer, setGeneratedAnswer] = useState("");
   const [timeTaken, setTimeTaken] = useState("");
   const auth_key = process.env.NEXT_PUBLIC_AUTH_KEY || "NA";
   const api_url = process.env.NEXT_PUBLIC_SERVER_API_URL || "NA";
@@ -53,13 +51,12 @@ const Home: NextPage = () => {
   useEffect(() => {
     regenerateButtons();
   
-  }, []);
+  }, [answerList]);
 
   const generateAnswer = async (e: any) => {
     setTimeTaken("");
     const startTime = Date.now();
     e.preventDefault();
-    setGeneratedAnswer("");
     setLoading(true);
     const response = await fetch(api_url, {
       method: "POST",
@@ -76,9 +73,7 @@ const Home: NextPage = () => {
       throw new Error(response.statusText);
     }
     const result = await response.json();
-
-
-    setGeneratedAnswer(result);
+    
     setLoading(false);
     setTimeTaken((((Date.now() - startTime) % 60000) / 1000) + "");
     regenerateButtons();
@@ -89,9 +84,7 @@ const Home: NextPage = () => {
     updateAnswerList([...answerList, { "id": textCount, "question": input, "output": outputOnly, "articleLink": article }]);
     setTextCount(textCount + 1);
     setQuestion("");
-    scrollToBios();
-
-    
+    scrollToBios();    
   };
 
   return (
