@@ -9,8 +9,8 @@ import LoadingDots from "../components/LoadingDots";
 
 
 
-const games = ["Phantom Galaxies", "Illuvium", "League of Kingdoms", "Decentraland", "Apeiron", "Star Atlas"];
-const questionTypes = ["What is ", " token price?", "What is the market cap of ", "What can you do in "];
+const games = ["Phantom Galaxies", "Illuvium", "League of Kingdoms", "Decentraland", "Apeiron", "Star Atlas", "Big Time", "King of Fighters", "Axie Infinity"];
+const questionTypes = ["What is ", "What is the token price of ", "What is the market cap of ", "What can you do in ", "Who is the team behind "];
 
 const Home: NextPage = () => {
 
@@ -23,8 +23,10 @@ const Home: NextPage = () => {
   const auth_key = process.env.NEXT_PUBLIC_AUTH_KEY || "NA";
   const api_url = process.env.NEXT_PUBLIC_SERVER_API_URL || "NA";
 
+  const [button1Text, setButton1Text] = useState("");
+  const [button2Text, setButton2Text] = useState("");
+  const [button3Text, setButton3Text] = useState("");
   const [textCount, setTextCount] = useState(0);
-
   const answerRef = useRef<null | HTMLDivElement>(null);
 
   const scrollToBios = () => {
@@ -34,10 +36,23 @@ const Home: NextPage = () => {
   };
 
   const input = question;
+  const regenerateButtons = () =>{
+    const randomNumber1 = Math.floor(Math.random() * games.length);
+    const randomNumber2 = Math.floor(Math.random() * games.length);
+    const randomNumber3 = Math.floor(Math.random() * games.length);
+
+    const randomNumber4 = Math.floor(Math.random() * questionTypes.length);
+    const randomNumber5 = Math.floor(Math.random() * questionTypes.length);
+    const randomNumber6 = Math.floor(Math.random() * questionTypes.length);
+
+    setButton1Text(questionTypes[randomNumber4] + games[randomNumber1]+"?");
+    setButton2Text(questionTypes[randomNumber5] + games[randomNumber2]+"?");
+    setButton3Text(questionTypes[randomNumber6] + games[randomNumber3]+"?");
+  };
 
   useEffect(() => {
-    const randomNumber = Math.floor(Math.random() * games.length);
-    setGameName("What is " + games[randomNumber]);
+    regenerateButtons();
+  
   }, []);
 
   const generateAnswer = async (e: any) => {
@@ -65,6 +80,8 @@ const Home: NextPage = () => {
 
     setGeneratedAnswer(result);
     setLoading(false);
+    setTimeTaken((((Date.now() - startTime) % 60000) / 1000) + "");
+    regenerateButtons();
 
     const outputOnly = result['output'];
     const article = result['article'];
@@ -73,6 +90,7 @@ const Home: NextPage = () => {
     setTextCount(textCount + 1);
     setQuestion("");
     scrollToBios();
+
     
   };
 
@@ -105,15 +123,15 @@ const Home: NextPage = () => {
           <div className="flex items-center justify-center space-x-3">
             <button onClick={(e) => setQuestion(e.currentTarget.innerHTML)}
               className="bg-purple-400 rounded-xl text-white text-xs px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full h-20 sm:h-12">
-              What are the games available?
+              {button1Text}
             </button>
             <button onClick={(e) => setQuestion(e.currentTarget.innerHTML)}
               className="bg-purple-400 rounded-xl text-white text-xs px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full h-20 sm:h-12">
-              {gameName}?
+              {button2Text}
             </button>
             <button onClick={(e) => setQuestion(e.currentTarget.innerHTML)}
               className="bg-purple-400 rounded-xl text-white text-xs px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full h-20 sm:h-12">
-              What are the action games?
+              {button3Text}
             </button>
           </div>
           <div ref={answerRef}>
