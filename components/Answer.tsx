@@ -1,11 +1,6 @@
 import { Toaster, toast } from "react-hot-toast";
-import YouTube from "react-youtube";
-import { useRef } from 'react';
-import { link } from "fs";
 import ReactMarkdown from 'react-markdown'
 import {FaRegCopy} from 'react-icons/fa';
-
-const games = ["Phantom Galaxies", "Illuvium", "League of Kingdoms", "Decentraland", "Apeiron", "Star Atlas"]
 
 type Answer = {
   id: number,
@@ -28,7 +23,6 @@ export default function Answer({ outputAnswer }: AnswerPropsType) {
 
   const baseURL = "https://core.avocadodao.io/games/";
   const video = "";
-  const articleLink = "";
 
   const listItems = outputAnswer.map(({ id, question, output, articleLink }) =>
     <>

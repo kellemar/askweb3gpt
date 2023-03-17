@@ -7,6 +7,7 @@ import Header from "../components/Header";
 import Answer from "../components/Answer";
 import LoadingDots from "../components/LoadingDots";
 
+
 // Input initial list of games
 const games = ["Phantom Galaxies", "Illuvium", "League of Kingdoms", "Decentraland", "Apeiron", "Star Atlas", "Big Time", "King of Fighters", "Axie Infinity"];
 
@@ -55,13 +56,11 @@ const Home: NextPage = () => {
   const [timeTaken, setTimeTaken] = useState("");
   const auth_key = process.env.NEXT_PUBLIC_AUTH_KEY || "NA";
   const api_url = process.env.NEXT_PUBLIC_SERVER_API_URL || "NA";
-
   const [button1Text, setButton1Text] = useState("");
   const [button2Text, setButton2Text] = useState("");
   const [button3Text, setButton3Text] = useState("");
-  const [textCount, setTextCount] = useState(0);
-  const answerRef = useRef<null | HTMLDivElement>(null);
 
+  const answerRef = useRef<null | HTMLDivElement>(null);
   const gameName = useRef("");
 
   const scrollToBios = () => {
@@ -115,15 +114,12 @@ const Home: NextPage = () => {
     
     setLoading(false);
     setTimeTaken((((Date.now() - startTime) % 60000) / 1000) + "");
-    console.log(result);
-    const outputOnly = result['output'];
-    const article = result['article'];
-    gameName.current = result['games_listed'][0];
-    //regenerateButtons(gameName);
-
-    setTextCount(textCount + 1);
-    updateAnswerList([...answerList, { "id": textCount, "question": input, "output": outputOnly, "articleLink": article }]);
-    setTextCount(textCount + 1);
+    const outputOnly = result.output;
+    const article = result.article;
+    const outputID = Buffer.from(Date.now()+"").toString('base64');
+    gameName.current = result?.games_listed?.[0];
+    
+    updateAnswerList([...answerList, { "id": outputID, "question": input, "output": outputOnly, "articleLink": article }]);
     setQuestion("");
     scrollToBios();    
   };
