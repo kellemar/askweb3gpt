@@ -7,6 +7,7 @@ type Answer = {
   question: string,
   output: string
   articleLink?: string
+  video?: string
 };
 
 type AnswerPropsType = {
@@ -17,14 +18,10 @@ type AnswerPropsType = {
 
 export default function Answer({ outputAnswer }: AnswerPropsType) {
 
-  //const answer = JSON.parse(generatedAnswer)['output'];
-  //const video = JSON.parse(generatedAnswer)['video'];
-  //const articleLink = JSON.parse(generatedAnswer)['article'];
-
   const baseURL = "https://core.avocadodao.io/games/";
   const video = "";
-
-  const listItems = outputAnswer.map(({ id, question, output, articleLink }) =>
+  
+  const listItems = outputAnswer.map(({ id, question, output, articleLink, video }) =>
     <>
       <div>
       </div>

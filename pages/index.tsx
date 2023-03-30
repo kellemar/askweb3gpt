@@ -116,10 +116,11 @@ const Home: NextPage = () => {
     setTimeTaken((((Date.now() - startTime) % 60000) / 1000) + "");
     const outputOnly = result.output;
     const article = result.article;
+    const video = result.video;
     const outputID = Buffer.from(Date.now()+"").toString('base64');
     gameName.current = result?.games_listed?.[0];
     
-    updateAnswerList([...answerList, { "id": outputID, "question": input, "output": outputOnly, "articleLink": article }]);
+    updateAnswerList([...answerList, { "id": outputID, "question": input, "output": outputOnly, "articleLink": article, "video": video }]);
     setQuestion("");
     scrollToBios();    
   };
@@ -164,7 +165,7 @@ const Home: NextPage = () => {
               {button3Text}
             </button>
           </div>
-          <div ref={answerRef}>
+         
           <textarea
             value={question}
             onChange={(e) => setQuestion(e.target.value)}
@@ -173,13 +174,14 @@ const Home: NextPage = () => {
             placeholder={
               "What's your question?"
             }
-          /></div>
+          />
           {!loading && (
+            <div  ref={answerRef}>
             <button
               className="bg-black rounded-xl text-white font-medium px-4 py-2 mt-2 hover:bg-black/80 w-full"
               onClick={(e) => generateAnswer(e)}>
               Ask!
-            </button>
+            </button></div>
           )}
           {loading && (
             <button
