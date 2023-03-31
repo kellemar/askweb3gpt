@@ -18,7 +18,6 @@ type AnswerPropsType = {
 
 export default function Answer({ outputAnswer }: AnswerPropsType) {
 
-  const baseURL = "https://core.avocadodao.io/games/";
   const video = "";
   
   const listItems = outputAnswer.map(({ id, question, output, articleLink, video }) =>
@@ -42,7 +41,7 @@ export default function Answer({ outputAnswer }: AnswerPropsType) {
                 rel="noreferrer"
                 className="font-bold hover:underline transition underline-offset-2"
               >
-                {baseURL + articleLink}
+                {articleLink}
               </a>
 
             </div>)}
