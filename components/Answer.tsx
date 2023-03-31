@@ -36,7 +36,7 @@ export default function Answer({ outputAnswer }: AnswerPropsType) {
             <div className="text-left m-5">
               Read more at: {" "}
               <a
-                href={baseURL + articleLink}
+                href={articleLink}
                 target="_blank"
                 rel="noreferrer"
                 className="font-bold hover:underline transition underline-offset-2"
