@@ -188,7 +188,7 @@ const Home: NextPage = () => {
               className="bg-black rounded-xl text-white font-medium px-4 py-2 mt-2 hover:bg-black/80 w-full"
               disabled
             >
-              <LoadingDots color="white" style="large" />
+              Thinking <LoadingDots color="white" style="large" />
             </button>
           )}
         </div>
