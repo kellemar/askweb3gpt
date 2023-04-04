@@ -6,7 +6,7 @@ export default function Header() {
     <header className="flex justify-between items-center w-full border-b-2 pt-2 pb-2 sm:px-4 px-2 bg-purple-800">
       <Link href="/" className="flex space-x-3">
         <h1 className="sm:text-4xl text-2xl font-bold ml-2 tracking-tight text-white">
-          askWeb3GPT
+          AvoDudeAI Premium
         </h1>
       </Link>
       <div>
