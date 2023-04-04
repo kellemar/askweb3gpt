@@ -85,20 +85,20 @@ const Home: NextPage = () => {
               </>
             )}
           </div>
-          {timeTaken && (
-            <div className="text-sm">
-              <p>This answer took {timeTaken} seconds.</p>
-            </div>
-          )}
+          
           <textarea
             value={question}
             onChange={(e) => setQuestion(e.target.value)}
-            rows={4}
+            rows={2}
             className="w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black my-5"
             placeholder={
               "What's your question?"
             }
           />
+          <div className="text-sm">
+              <p>You have 100 questions left.</p>
+            </div>
+
           {!loading && (
             <div  ref={answerRef}>
             <button
