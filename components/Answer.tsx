@@ -1,6 +1,7 @@
 import { Toaster, toast } from "react-hot-toast";
 import ReactMarkdown from 'react-markdown'
 import {FaRegCopy} from 'react-icons/fa';
+import Image from 'next/image';
 
 type Answer = {
   id: number,
@@ -8,6 +9,7 @@ type Answer = {
   output: string
   articleLink?: string
   video?: string
+  image_generated?: string
 };
 
 type AnswerPropsType = {
@@ -20,7 +22,7 @@ export default function Answer({ outputAnswer }: AnswerPropsType) {
 
   const video = "";
   
-  const listItems = outputAnswer.map(({ id, question, output, articleLink, video }) =>
+  const listItems = outputAnswer.map(({ id, question, output, articleLink, video, image_generated }) =>
     <>
       <div>
       </div>
@@ -45,6 +47,13 @@ export default function Answer({ outputAnswer }: AnswerPropsType) {
               </a>
 
             </div>)}
+
+          {image_generated && (
+              <div>
+              <Image src={"data:image/png;base64,"+image_generated} alt="Generated image" width={500} height={500} />
+            </div>  
+          
+          )}
           {video && (
 
             <div className="flex mt-10 justify-center">

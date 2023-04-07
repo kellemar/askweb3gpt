@@ -56,10 +56,11 @@ const Home: NextPage = () => {
     const outputOnly = result.output;
     const article = result.article;
     const video = result.video;
+    const image_generated = result?.image_generated;
     const outputID = Buffer.from(Date.now()+"").toString('base64');
     gameName.current = result?.games_listed?.[0];
     
-    updateAnswerList([...answerList, { "id": outputID, "question": input, "output": outputOnly, "articleLink": article, "video": video }]);
+    updateAnswerList([...answerList, { "id": outputID, "question": input, "output": outputOnly, "articleLink": article, "video": video, "image_generated": image_generated }]);
     setQuestion("");
     scrollToBios();    
   };
