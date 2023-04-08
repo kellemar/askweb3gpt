@@ -35,6 +35,14 @@ const Home: NextPage = () => {
     const startTime = Date.now();
     e.preventDefault();
     setLoading(true);
+
+    const chatHistory = answerList
+    .map(
+      (item) => `Human: ${item.question}\nAI: ${item.output}\n`
+    )
+    .join("");
+
+    console.log(chatHistory);
     const response = await fetch(api_url, {
       method: "POST",
       headers: {
@@ -42,7 +50,7 @@ const Home: NextPage = () => {
         "Authorization": "Bearer " + auth_key
       },
       body: JSON.stringify({
-        input,
+        chatHistory,input,
       }),
     });
 
@@ -50,7 +58,7 @@ const Home: NextPage = () => {
       throw new Error(response.statusText);
     }
     const result = await response.json();
-    
+   
     setLoading(false);
     setTimeTaken((((Date.now() - startTime) % 60000) / 1000) + "");
     const outputOnly = result.output;
