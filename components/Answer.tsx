@@ -50,7 +50,7 @@ export default function Answer({ outputAnswer }: AnswerPropsType) {
 
           {image_generated && (
               <div className="p-5 items-center justify-center">
-              <Image src={"data:image/png;base64,"+image_generated} alt={output} width={500} height={500} />
+              <Image src={"data:image/png;base64,"+image_generated} alt={output} width={500} height={480} />
             </div>  
           
           )}
