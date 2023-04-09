@@ -26,7 +26,7 @@ export default function Answer({ outputAnswer }: AnswerPropsType) {
     <>
       <div>
       </div>
-      <div className="space-y-2 flex flex-col items-center justify-center min-w-m max-w-xl mx-auto max-w-xl w-full">
+      <div className="space-y-2 flex flex-col items-center justify-center min-w-m max-w-xl mx-auto w-full">
       <div
             className="mt-5 ml-auto p-10 bg-purple-200 rounded-xl text-black text-s px-2 mb-2 py-2">
             {question}
@@ -49,8 +49,8 @@ export default function Answer({ outputAnswer }: AnswerPropsType) {
             </div>)}
 
           {image_generated && (
-              <div>
-              <Image src={"data:image/png;base64,"+image_generated} alt="Generated image" width={500} height={500} />
+              <div className="p-5 items-center justify-center">
+              <Image src={"data:image/png;base64,"+image_generated} alt={output} width={500} height={500} />
             </div>  
           
           )}
