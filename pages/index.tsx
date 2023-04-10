@@ -8,7 +8,7 @@ import Answer from "../components/Answer";
 import LoadingDots from "../components/LoadingDots";
 
 // Input initial list of games
-const games = ["Phantom Galaxies", "Illuvium", "League of Kingdoms", "Decentraland", "Apeiron", "Star Atlas", "Big Time", "King of Fighters", "Axie Infinity"];
+const games = ["Bitcoin", "Ethereum", "Matic", "Avalanche", "Arbitrum", "Solana","Phantom Galaxies", "Illuvium", "League of Kingdoms", "Decentraland", "Apeiron", "Star Atlas", "Big Time", "King of Fighters", "Axie Infinity"];
 
 // Create enum of questions users can select
 enum QuestionType {
@@ -155,7 +155,20 @@ const Home: NextPage = () => {
               </>
             )}
           </div>
-          
+          <div className="flex items-center justify-center space-x-3">
+            <button onClick={(e) => setQuestion(e.currentTarget.innerHTML)}
+              className="bg-purple-400 rounded-xl text-white text-xs px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full h-20 sm:h-12">
+              {button1Text}
+            </button>
+            <button onClick={(e) => setQuestion(e.currentTarget.innerHTML)}
+              className="bg-purple-400 rounded-xl text-white text-xs px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full h-20 sm:h-12">
+              {button2Text}
+            </button>
+            <button onClick={(e) => setQuestion(e.currentTarget.innerHTML)}
+              className="bg-purple-400 rounded-xl text-white text-xs px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full h-20 sm:h-12">
+              {button3Text}
+            </button>
+          </div>
           <textarea
             value={question}
             onChange={(e) => setQuestion(e.target.value)}
