@@ -7,7 +7,45 @@ import Header from "../components/Header";
 import Answer from "../components/Answer";
 import LoadingDots from "../components/LoadingDots";
 
+// Input initial list of games
+const games = ["Phantom Galaxies", "Illuvium", "League of Kingdoms", "Decentraland", "Apeiron", "Star Atlas", "Big Time", "King of Fighters", "Axie Infinity"];
 
+// Create enum of questions users can select
+enum QuestionType {
+  Name = 'What is ',
+  TokenPrice = 'What is the token price of ',
+  MarketCap = 'What is the market cap of ',
+  Actions = 'What can you do in ',
+  Team = 'Who is the team behind ',
+  Discord = 'What is the Discord for ',
+  Twitter = 'What is the Twitter of ',
+  Play = 'How do you play ',
+  Tokens = 'What are the tokens in ',
+}
+
+// Create groups of questions to mimic randomness
+const questionTypes1 = [
+  QuestionType.Name,
+  QuestionType.TokenPrice,
+  QuestionType.MarketCap,
+];
+
+const questionTypes2 = [
+  QuestionType.Actions,
+  QuestionType.Team,
+  QuestionType.Discord,
+];
+
+const questionTypes3 = [
+  QuestionType.Twitter,
+  QuestionType.Play,
+  QuestionType.Tokens,
+];
+
+
+function getRandomIndex(array: any[]) {
+  return Math.floor(Math.random() * array.length);
+}
 
 const Home: NextPage = () => {
 
