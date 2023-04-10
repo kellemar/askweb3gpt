@@ -42,7 +42,7 @@ const Home: NextPage = () => {
     )
     .join("");
 
-    console.log(chatHistory);
+    //console.log(chatHistory);
     const response = await fetch(api_url, {
       method: "POST",
       headers: {
