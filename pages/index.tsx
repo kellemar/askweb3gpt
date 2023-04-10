@@ -55,7 +55,10 @@ const Home: NextPage = () => {
   const [timeTaken, setTimeTaken] = useState("");
   const auth_key = process.env.NEXT_PUBLIC_AUTH_KEY || "NA";
   const api_url = process.env.NEXT_PUBLIC_SERVER_API_URL || "NA";
-  
+  const [button1Text, setButton1Text] = useState("");
+  const [button2Text, setButton2Text] = useState("");
+  const [button3Text, setButton3Text] = useState("");
+
   const answerRef = useRef<null | HTMLDivElement>(null);
   const gameName = useRef("");
 
@@ -66,6 +69,26 @@ const Home: NextPage = () => {
   };
 
   const input = question;
+  const regenerateButtons = (gameName?: string) =>{
+    console.log(gameName);
+    const randomGameIdx1 = getRandomIndex(games);
+    const randomGameIdx2 = getRandomIndex(games);
+    const randomGameIdx3 = getRandomIndex(games);
+
+    const randomQuestionIdx1 = getRandomIndex(questionTypes1);
+    const randomQuestionIdx2 = getRandomIndex(questionTypes2);
+    const randomQuestionIdx3 = getRandomIndex(questionTypes3);
+
+    setButton1Text(`${questionTypes1[randomQuestionIdx1]}${gameName || games[randomGameIdx1]}?`);
+    setButton2Text(`${questionTypes2[randomQuestionIdx2]}${gameName || games[randomGameIdx2]}?`);
+    setButton3Text(`${questionTypes3[randomQuestionIdx3]}${gameName || games[randomGameIdx3]}?`);
+    
+  };
+
+  useEffect(() => {
+    regenerateButtons(gameName.current);
+  
+  }, [answerList]);
   
 
   const generateAnswer = async (e: any) => {
