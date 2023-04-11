@@ -36,10 +36,10 @@ export default function Answer({ outputAnswer }: AnswerPropsType) {
           <ReactMarkdown className="text-left m-5">{output}</ReactMarkdown>
           {articleLink && (
            
-             <div className="text-left ml-5">Sources:{" "}</div>
+             <div className="text-left m-5">Sources:{" "}</div>
           )}
           {articleLink && articleLink.map((link, index) => (
-             <div className="text-left ml-5">
+             <div className="text-left m-5">
               <a key={index} 
                 href={link}
                 target="_blank"
