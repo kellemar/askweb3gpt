@@ -17,7 +17,6 @@ type AnswerPropsType = {
 };
 
 
-
 export default function Answer({ outputAnswer }: AnswerPropsType) {
 
   const video = "";
@@ -34,12 +33,12 @@ export default function Answer({ outputAnswer }: AnswerPropsType) {
         <div className="bg-purple-100 rounded-xl shadow-md p-4 hover:bg-purple-200 transition border w-full" key={id}>
         
           <ReactMarkdown className="text-left m-5">{output}</ReactMarkdown>
-          {articleLink && (
+          {articleLink?.length != 0 && (
            
-             <div className="text-left m-5">Sources:{" "}</div>
+             <div className="text-left ml-5">Sources:{" "}</div>
           )}
           {articleLink && articleLink.map((link, index) => (
-             <div className="text-left m-5">
+             <div className="text-left ml-5 mr-5 mb-5">
               <a key={index} 
                 href={link}
                 target="_blank"
