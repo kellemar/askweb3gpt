@@ -123,7 +123,7 @@ const Home: NextPage = () => {
     setLoading(false);
     setTimeTaken((((Date.now() - startTime) % 60000) / 1000) + "");
     const outputOnly = result.output;
-    const article = result.article;
+    const article = result.sources;
     const video = result.video;
     const image_generated = result?.image_generated;
     const outputID = Buffer.from(Date.now()+"").toString('base64');

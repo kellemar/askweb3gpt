@@ -6,9 +6,9 @@ import Image from 'next/image';
 type Answer = {
   id: number,
   question: string,
-  output: string
-  articleLink?: string
-  video?: string
+  output: string,
+  articleLink?: Array<string>,
+  video?: string,
   image_generated?: string
 };
 
@@ -35,18 +35,22 @@ export default function Answer({ outputAnswer }: AnswerPropsType) {
         
           <ReactMarkdown className="text-left m-5">{output}</ReactMarkdown>
           {articleLink && (
-            <div className="text-left m-5">
-              Read more at: {" "}
-              <a
-                href={articleLink}
+           
+             <div className="text-left ml-5">Sources:{" "}</div>
+          )}
+          {articleLink && articleLink.map((link, index) => (
+             <div className="text-left ml-5">
+              <a key={index} 
+                href={link}
                 target="_blank"
                 rel="noreferrer"
                 className="font-bold hover:underline transition underline-offset-2"
               >
-                {articleLink}
+                {link}
               </a>
-
-            </div>)}
+              </div>
+          ))}
+          
 
           {image_generated && (
               <div className="p-5 items-center justify-center">
