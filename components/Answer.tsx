@@ -37,7 +37,7 @@ export default function Answer({ outputAnswer }: AnswerPropsType) {
            
              <div className="text-left ml-5">Sources:{" "}</div>
           )}
-          {articleLink && articleLink.map((link, index) => (
+          {articleLink?.length != 0 && articleLink && articleLink.map((link, index) => (
              <div className="text-left ml-5 mr-5 mb-5">
               <a key={index} 
                 href={link}

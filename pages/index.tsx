@@ -19,8 +19,7 @@ enum QuestionType {
   Team = 'Who is the team behind ',
   Discord = 'What is the Discord for ',
   Twitter = 'What is the Twitter of ',
-  Play = 'How do you play ',
-  Tokens = 'What are the tokens in ',
+  Facebook = 'What is the Facebook of ',
 }
 
 // Create groups of questions to mimic randomness
@@ -33,13 +32,13 @@ const questionTypes1 = [
 const questionTypes2 = [
   QuestionType.Actions,
   QuestionType.Team,
-  QuestionType.Discord,
+  
 ];
 
 const questionTypes3 = [
   QuestionType.Twitter,
-  QuestionType.Play,
-  QuestionType.Tokens,
+  QuestionType.Discord,
+  QuestionType.Facebook,
 ];
 
 
@@ -70,18 +69,15 @@ const Home: NextPage = () => {
 
   const input = question;
   const regenerateButtons = (gameName?: string) =>{
-    console.log(gameName);
-    const randomGameIdx1 = getRandomIndex(games);
-    const randomGameIdx2 = getRandomIndex(games);
-    const randomGameIdx3 = getRandomIndex(games);
+    const questionTypes = [questionTypes1, questionTypes2, questionTypes3];
+    const setButtonTexts = [setButton1Text, setButton2Text, setButton3Text];
 
-    const randomQuestionIdx1 = getRandomIndex(questionTypes1);
-    const randomQuestionIdx2 = getRandomIndex(questionTypes2);
-    const randomQuestionIdx3 = getRandomIndex(questionTypes3);
+    for (let i = 0; i < questionTypes.length; i++) {
+      const randomGameIdx = getRandomIndex(games);
+      const randomQuestionIdx = getRandomIndex(questionTypes[i]);
 
-    setButton1Text(`${questionTypes1[randomQuestionIdx1]}${gameName || games[randomGameIdx1]}?`);
-    setButton2Text(`${questionTypes2[randomQuestionIdx2]}${gameName || games[randomGameIdx2]}?`);
-    setButton3Text(`${questionTypes3[randomQuestionIdx3]}${gameName || games[randomGameIdx3]}?`);
+      setButtonTexts[i](`${questionTypes[i][randomQuestionIdx]}${gameName || games[randomGameIdx]}?`);
+    }
     
   };
 
@@ -128,6 +124,7 @@ const Home: NextPage = () => {
     const image_generated = result?.image_generated;
     const outputID = Buffer.from(Date.now()+"").toString('base64');
     gameName.current = result?.games_listed?.[0];
+    console.log(result);
     
     updateAnswerList([...answerList, { "id": outputID, "question": input, "output": outputOnly, "articleLink": article, "video": video, "image_generated": image_generated }]);
     setQuestion("");
