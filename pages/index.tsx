@@ -93,7 +93,7 @@ const Home: NextPage = () => {
     e.preventDefault();
     setLoading(true);
 
-    const chatHistory = answerList
+    const chat_history = answerList
     .map(
       (item) => `Human: ${item.question}\nAI: ${item.output}\n`
     )
@@ -107,7 +107,7 @@ const Home: NextPage = () => {
         "Authorization": "Bearer " + auth_key
       },
       body: JSON.stringify({
-        chatHistory,input,
+        chat_history,input,
       }),
     });
 
