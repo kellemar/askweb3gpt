@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 type Answer = {
   id: number,
-  question: string,
+  input: string,
   output: string,
   articleLink?: Array<string>,
   video?: string,
@@ -21,14 +21,14 @@ export default function Answer({ outputAnswer }: AnswerPropsType) {
 
   const video = "";
   
-  const listItems = outputAnswer.map(({ id, question, output, articleLink, video, image_generated }) =>
+  const listItems = outputAnswer.map(({ id, input, output, articleLink, video, image_generated }) =>
     <>
       <div>
       </div>
       <div className="space-y-2 flex flex-col items-center justify-center min-w-m max-w-xl mx-auto w-full">
       <div
             className="mt-5 ml-auto p-10 bg-purple-200 rounded-xl text-black text-s px-2 mb-2 py-2">
-            {question}
+            {input}
           </div>
         <div className="bg-purple-100 rounded-xl shadow-md p-4 hover:bg-purple-200 transition border w-full" key={id}>
         

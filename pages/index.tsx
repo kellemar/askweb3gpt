@@ -92,14 +92,21 @@ const Home: NextPage = () => {
     const startTime = Date.now();
     e.preventDefault();
     setLoading(true);
-
-    const chat_history = answerList
+    /*const chat_history = answerList
     .map(
-      (item) => `Human: ${item.question}\nAI: ${item.output}\n`
+      (item) => `Human: ${item.input}\nAI: ${item.output}\n`
     )
     .join("");
-
-    //console.log(chatHistory);
+      */
+    let chat_history = answerList.map(item => {
+      let outputValue = Array.isArray(item.output) ? 'No answer found.' : item.output;
+      return {input: item.input, output: outputValue};
+    });
+    // Only send in the last 4 conversations between user and AI
+    if(chat_history.length > 4){
+      chat_history = chat_history.slice(-4);
+    }
+    console.log(chat_history);
     const response = await fetch(api_url, {
       method: "POST",
       headers: {
@@ -118,7 +125,7 @@ const Home: NextPage = () => {
    
     setLoading(false);
     setTimeTaken((((Date.now() - startTime) % 60000) / 1000) + "");
-    const outputOnly = result.output;
+    const outputOnly = result.output ?? "No answer found.";
     const article = result.sources;
     const video = result.video;
     const image_generated = result?.image_generated;
@@ -126,7 +133,7 @@ const Home: NextPage = () => {
     gameName.current = result?.games_listed?.[0];
     console.log(result);
     
-    updateAnswerList([...answerList, { "id": outputID, "question": input, "output": outputOnly, "articleLink": article, "video": video, "image_generated": image_generated }]);
+    updateAnswerList([...answerList, { "id": outputID, "input": input, "output": outputOnly, "articleLink": article, "video": video, "image_generated": image_generated }]);
     setQuestion("");
     scrollToBios();    
   };
@@ -152,6 +159,7 @@ const Home: NextPage = () => {
               </>
             )}
           </div>
+          
           <div className="flex items-center justify-center space-x-3">
             <button onClick={(e) => setQuestion(e.currentTarget.innerHTML)}
               className="bg-purple-400 rounded-xl text-white text-xs px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full h-20 sm:h-12">
