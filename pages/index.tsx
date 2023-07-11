@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Answer from "../components/Answer";
 import LoadingDots from "../components/LoadingDots";
+import { Client, auth } from "twitter-api-sdk";
 
 // Input initial list of games
 const games = ["Bitcoin", "Ethereum", "Matic", "Avalanche", "Arbitrum", "Solana","Phantom Galaxies", "Illuvium", "League of Kingdoms", "Decentraland", "Apeiron", "Star Atlas", "Big Time", "King of Fighters", "Axie Infinity"];
@@ -138,6 +139,28 @@ const Home: NextPage = () => {
     scrollToBios();    
   };
 
+  const connectTwitter = async (e: any) => {
+    setTimeTaken("");
+    e.preventDefault();
+    const startTime = Date.now();
+    const STATE = "my-state";
+    
+    const authClient = new auth.OAuth2User({
+      client_id: "SXpCWi0wVEttLVVwQWNScnRoVUc6MTpjaQ",
+      client_secret: "nv4GwauWzQYWTtipNQeRyt446_G-aWE-OUreG_9FVgyW9zYhHD",
+      callback: "https://questing-api-prod.avocadodao.io/api/v1/webhook/twitter/callback",
+      scopes: ['follows.read','tweet.read', 'users.read', 'offline.access'],
+    })
+    
+    const client = new Client(authClient);
+    const authUrl = await authClient.generateAuthURL({
+      state: STATE, 
+      code_challenge_method: 'plain',
+      code_challenge: "01cc82f71eea4d5ba61fc70aebe262874c59e786028af1de45ee3f9e",
+    });
+    console.log(authUrl);
+  };
+
   return (
     <div className="flex mx-auto flex-col items-center justify-center min-h-screen">
       <Head>
@@ -159,7 +182,11 @@ const Home: NextPage = () => {
               </>
             )}
           </div>
-          
+          <button
+              className="bg-black rounded-xl text-white font-medium px-4 py-2 mt-2 hover:bg-black/80 w-full"
+              onClick={(e) => connectTwitter(e)}>
+              Connect Twitter
+            </button>
           <div className="flex items-center justify-center space-x-3">
             <button onClick={(e) => setQuestion(e.currentTarget.innerHTML)}
               className="bg-purple-400 rounded-xl text-white text-xs px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full h-20 sm:h-12">
